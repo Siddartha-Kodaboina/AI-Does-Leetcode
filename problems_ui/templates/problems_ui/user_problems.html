@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problems Created by You</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'problems_ui/styles.css' %}">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="{% url 'all_problems' %}" class="inactive_problems_page {% if title == 'All Problems' %}active{% endif %}">All Problems</a>
+        <a href="{% url 'user_problems' %}" class="active_problems_page {% if title == 'Problems Created by You' %}active{% endif %}">Problems Created by You</a>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+        <h1>{{ title }}</h1>
+        <table class="problems-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Difficulty</th>
+                    <th>Company</th>
+                    <th>Success Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for problem in problems %}
+                <tr>
+                    <td>
+                        <a href="{% url 'problem_detail' problem.question_id %}">
+                            {{ problem.title }}
+                        </a>
+                    </td>
+                    <td>{{ problem.difficulty }}</td>
+                    <td>{{ problem.company }}</td>
+                    <td>{{ problem.successful_submissions }}/{{ problem.num_submissions }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+</body>
+</html>

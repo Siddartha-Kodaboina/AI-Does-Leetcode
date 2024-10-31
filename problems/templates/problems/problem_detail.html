@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ problem.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'problems/styles.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs/loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Problem description (Left side) -->
+        <div class="problem-section">
+            <h1>{{ problem.title }}</h1>
+            <div>
+                {{ html_content|safe }}  <!-- Display problem description -->
+            </div>
+        </div>
+
+        <!-- Code Editor and Test Results (Right side) -->
+        <div class="editor-section">
+            <div class="code-settings">
+                <!-- Theme and language options -->
+                <label for="theme-select">Theme: </label>
+                <select id="theme-select">
+                    <option value="vs-dark">Dark</option>
+                    <option value="vs-light">Light</option>
+                </select>
+
+                <label for="language-select">Language: </label>
+                <select id="language-select">
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="cpp">C++</option>
+                    <option value="c">C</option>
+                    <option value="java">Java</option>
+                </select>
+            </div>
+
+            <!-- Monaco Code Editor -->
+            <div id="editor-container" class="editor"></div>
+
+            <!-- Controls -->
+            <div class="editor-controls">
+                <button id="run-code-btn" class="action-btn">Run Test Cases</button>
+                <button id="submit-code-btn" class="action-btn">Submit Code</button>
+            </div>
+
+            <!-- Test Case Results -->
+            <div id="test-case-results" class="test-case-results"></div>
+        </div>
+    </div>
+
+    <script>
+        // Load Monaco editor
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs' }});
+        
+        let editor; // Declare globally
+
+        require(['vs/editor/editor.main'], function () {
+            editor = monaco.editor.create(document.getElementById('editor-container'), {
+                value: "# Write your code here\n",
+                language: 'python',
+                theme: 'vs-dark',
+                automaticLayout: true,
+            });
+        });
+
+        // Theme and language change
+        document.getElementById('theme-select').addEventListener('change', function() {
+            monaco.editor.setTheme(this.value);
+        });
+
+        document.getElementById('language-select').addEventListener('change', function() {
+            monaco.editor.setModelLanguage(editor.getModel(), this.value);
+        });
+
+        // Display test case results dynamically
+        function displayResults(results) {
+            let resultHTML = '';
+            results.forEach(function(result) {
+                resultHTML += `
+                    <div class="test-case-card">
+                        <button class="test-case-header" onclick="toggleTestCase(${result.test_case})">
+                            Test Case ${result.test_case} - ${result.result}
+                        </button>
+                        <div id="test-case-${result.test_case}" class="test-case-details">
+                            <p><strong>Input:</strong> ${result.input}</p>
+                            <p><strong>Expected:</strong> ${result.expected}</p>
+                            <p><strong>Actual:</strong> ${result.actual}</p>
+                            <p><strong>Status:</strong> ${result.result}</p>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById('test-case-results').innerHTML = resultHTML;
+        }
+
+        // Fetch the editor content, language, and send to the backend for evaluation
+        document.getElementById('run-code-btn').addEventListener('click', function() {
+            const source_code = editor.getValue();
+            const language = document.getElementById('language-select').value;
+
+            fetch("{% url 'run_code' problem.question_id %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    source_code: source_code,
+                    language: language
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayResults(data.test_case_results);
+            })
+            .catch(err => console.error('Error:', err));
+        });
+
+        // Toggle test case display
+        function toggleTestCase(testCaseId) {
+            const details = document.getElementById(`test-case-${testCaseId}`);
+            details.style.display = details.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</body>
+</html>

@@ -6,13 +6,39 @@
     <title>Problems Created by You</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'problems_ui/styles.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homepage/styles.css' %}">
 </head>
 <body>
+    <header>
+        <div class="logo">AIDoesLeetCode</div>
+        <nav>
+            <ul>
+                <li><a href="http://127.0.0.1:8000/problems_list/all_problems/">Practice</a></li>
+                <li><a href="http://127.0.0.1:8000/questions/create">Create</a></li>
+                <li><a href="http://127.0.0.1:8000/audio_player/">Audio Notebooks</a></li>
+                <li><a href="#">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
     <!-- Navigation bar -->
     <div class="navbar">
         <a href="{% url 'all_problems' %}" class="inactive_problems_page {% if title == 'All Problems' %}active{% endif %}">All Problems</a>
         <a href="{% url 'user_problems' %}" class="active_problems_page {% if title == 'Problems Created by You' %}active{% endif %}">Problems Created by You</a>
     </div>
+    {% if processing_problems %}
+    <div class="processing-section">
+            <h3>Problems Being Processed</h3>
+            <ul>
+                {% for problem in processing_problems %}
+                    <li>{{ problem.title }} (Processing...)</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+<!-- Existing code for displaying other problems -->
 
     <!-- Page Content -->
     <div class="content">
@@ -43,5 +69,6 @@
             
         </table>
     </div>
+</main>
 </body>
 </html>

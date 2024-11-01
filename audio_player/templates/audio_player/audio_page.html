@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player - AI Audio Books</title>
+    <link rel="stylesheet" href="{% static 'audio_player/styles.css' %}">
+    <script src="{% static 'audio_player/script.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">AIDoesLeetCode</div>
+        <nav>
+            <ul>
+                <li><a href="http://127.0.0.1:8000/problems_list/all_problems/">Practice</a></li>
+                <li><a href="http://127.0.0.1:8000/questions/create">Create</a></li>
+                <li><a href="http://127.0.0.1:8000/audio_player/">Audio Notebooks</a></li>
+                <li><a href="#">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="content-container">
+            <!-- Problem description section -->
+            <div class="problem-section">
+                <h2>Problem Description</h2>
+                {% if html_content %}
+                    <div class="problem-content">
+                        {{ html_content|safe }}
+                    </div>
+                {% else %}
+                    <p>{{ error }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Audio player section -->
+            <div class="audio-player-container">
+                {% if audio %}
+                    <h2>{{ audio.title }}</h2>
+                    <audio id="custom-audio-player" controls autoplay>
+                        <source src="{{ audio.audio_url }}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="custom-controls">
+                        <button onclick="previousAudio()">&#9664; Previous</button>
+                        <button onclick="togglePlayPause()">Play/Pause</button>
+                        <button onclick="nextAudio()">Next &#9654;</button>
+                    </div>
+                {% else %}
+                    <p>{{ error }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Related audios section -->
+        <section class="related-audios">
+            <h3>Related Audio Books</h3>
+            <ul>
+                {% for book in related_audios %}
+                    <li><a href="?question_id={{ book.question_id }}">{{ book.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

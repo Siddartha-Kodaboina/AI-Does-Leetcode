@@ -1,67 +1,120 @@
+/* Basic resets and body styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
   color: #333;
+  padding: 20px;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: #2d2e32; */
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  color: white;
+  padding: 14px 20px;
+  /* background-color: #2d2e32;  */
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+  /* background-color: #575757; */
+}
+
+.navbar a.active {
+  background: linear-gradient(90deg, #6e8efb, #a777e3);
+  color: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Table styling */
+.problems-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.problems-table th, .problems-table td {
+  padding: 12px 15px;
+  text-align: left;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.problems-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.problems-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Content Styling */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 28px;
+  text-align: center;
+  font-size: 2rem;
   color: #333;
-  text-align: center;
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-table {
-  width: 80%;
-  margin: 20px auto;
-  border-collapse: collapse;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-th {
-  background-color: #f4f4f9;
-  color: #444;
-}
-
-td {
-  background-color: #fff;
-}
-
-.highlight {
-  border: 2px solid #6633ff;
-  color: #6633ff;
+.active_problems_page{
+  color: white;
   font-weight: bold;
+  background-color: #6e8efb;
 }
 
-.top-bar {
-  background-color: #3e3e3e;
-  padding: 15px;
+.inactive_problems_page{
   color: white;
-  text-align: center;
+  /* font-weight: bold; */
+  background-color: #2d2e32;
 }
 
-.nav-bar a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
+.problem-detail-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100vh;
 }
 
-.button {
-  background-color: #6633ff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
+.problem-description {
+  width: 45%;
+  padding: 20px;
+  overflow-y: scroll;
+  background-color: #f9f9f9;
+
 }
 
-.button:hover {
-  background-color: #5633d0;
+.code-editor {
+  width: 50%;
+  padding: 20px;
+  border-left: 1px solid #ddd;
 }
+

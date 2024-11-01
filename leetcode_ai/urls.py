@@ -22,4 +22,6 @@ urlpatterns = [
     path('questions/', include('questions.urls')),
     path('problems_list/', include('problems_ui.urls')),
     path('problems/', include('problems.urls')),
+    path('audio_player/', include('audio_player.urls')),
+    path('', include('homepage.urls')), 
 ]

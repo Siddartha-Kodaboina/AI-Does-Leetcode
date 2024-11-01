@@ -1,0 +1,106 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4caf50;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px;
+}
+
+.problem-section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.problem-content {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.audio-player-container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.custom-controls button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-controls button:hover {
+  background-color: #45a049;
+}
+
+.related-audios {
+  margin: 20px;
+  padding: 20px;
+  background-color: #e7f5e9;
+  border-radius: 10px;
+}
+
+.related-audios h3 {
+  margin-bottom: 10px;
+}
+
+.related-audios ul {
+  list-style: none;
+  padding: 0;
+}
+
+.related-audios li {
+  padding: 5px 0;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.related-audios li a {
+  text-decoration: none;
+  color: #4caf50;
+}
+
+.related-audios li a:hover {
+  text-decoration: underline;
+}

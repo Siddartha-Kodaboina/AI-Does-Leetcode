@@ -7,8 +7,22 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'problems/styles.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs/loader.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homepage/styles.css' %}">
 </head>
 <body>
+    <header>
+        <div class="logo">AIDoesLeetCode</div>
+        <nav>
+            <ul>
+                <li><a href="http://127.0.0.1:8000/problems_list/all_problems/">Practice</a></li>
+                <li><a href="http://127.0.0.1:8000/questions/create">Create</a></li>
+                <li><a href="http://127.0.0.1:8000/audio_player/">Audio Notebooks</a></li>
+                <li><a href="#">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
     <div class="container">
         <!-- Problem description (Left side) -->
         <div class="problem-section">
@@ -20,6 +34,8 @@
 
         <!-- Code Editor and Test Results (Right side) -->
         <div class="editor-section">
+
+            <!-- Code Settings -->
             <div class="code-settings">
                 <!-- Theme and language options -->
                 <label for="theme-select">Theme: </label>
@@ -43,15 +59,26 @@
 
             <!-- Controls -->
             <div class="editor-controls">
-                <button id="run-code-btn" class="action-btn">Run Test Cases</button>
-                <button id="submit-code-btn" class="action-btn">Submit Code</button>
+                <div class="button-group">
+                    <button id="run-code-btn" class="action-btn">Run Test Cases</button>
+                    <button id="submit-code-btn" class="action-btn">Submit Code</button>
+                </div>
+                <div class="audio-container">
+                    <audio id="audioPlayer" controls>
+                        <source src="{{ problem.audio_url }}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
             </div>
+            
+            
 
             <!-- Test Case Results -->
             <div id="test-case-results" class="test-case-results"></div>
+
         </div>
     </div>
-
+</main>
     <script>
         // Load Monaco editor
         require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs' }});

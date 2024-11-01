@@ -56,9 +56,23 @@
         }
 
     </style>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'homepage/styles.css' %}">
 </head>
 <body>
     <div class="container">
+        <header>
+            <div class="logo">AIDoesLeetCode</div>
+            <nav>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/problems_list/all_problems/">Practice</a></li>
+                    <li><a href="http://127.0.0.1:8000/questions/create">Create</a></li>
+                    <li><a href="http://127.0.0.1:8000/audio_player/">Audio Notebooks</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
         <h1>Create AI Leetcode Question</h1>
 
         <form method="post" enctype="multipart/form-data">
@@ -72,5 +86,6 @@
             <button type="submit">Generate AI Leetcode Question with GPT 4o</button>
         </form>
     </div>
+</main>
 </body>
 </html>

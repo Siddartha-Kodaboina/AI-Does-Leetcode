@@ -56,6 +56,10 @@ def problem_detail(request, question_id):
             'problem': problem,
             'error': "Error: Unable to fetch the HTML file from S3."
         })
+        
+    # Ensure audio URL is available in the problem data
+    if 'audio_url' not in problem:
+        problem['audio_url'] = f"https://{s3_bucket_name}.s3.{os.getenv('AWS_REGION')}.amazonaws.com/{question_id}/interview_audio.mp3"
 
     return render(request, 'problems/problem_detail.html', {
         'problem': problem,

@@ -1,6 +1,6 @@
 # LeetCode Question Generator 🚀
 
-![Architecture Diagram Image]("./Architecture%20Diagram.png")
+![Architecture Diagram Image](./Architecture%20Diagram.png)
 
 Transform interview discussion questions into fully-functional LeetCode-style problems with just one click! This platform allows users to create and practice coding problems by simply submitting descriptions from interview discussions.
 

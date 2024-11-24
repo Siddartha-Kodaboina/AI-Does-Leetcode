@@ -142,8 +142,8 @@ python manage.py runserver
 # 🙏 Acknowledgments
 
 OpenAI for providing API credits during the hackathon
+
 The LeetCode community for inspiration
-All contributors and testers
 
 
 Built with ❤️ during the OpenAI GPT-4 96-hour Hackathon

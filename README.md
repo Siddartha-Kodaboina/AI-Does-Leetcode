@@ -146,7 +146,9 @@ OpenAI for providing API credits during the hackathon
 The LeetCode community for inspiration
 
 
-Built with ❤️ during the OpenAI GPT-4 96-hour Hackathon
+<div align="center">
+  <i>Built with ❤️ during the OpenAI GPT-4 96-hour Hackathon</i>
+</div>
 
 
 
